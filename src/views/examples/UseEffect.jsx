@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PageTitle from '../../components/layout/PageTitle'
+import SectionTitle from '../../components/layout/SectionTitle'
 
 function calcFatorial(num){
     const n = parseInt(num)
@@ -12,6 +13,8 @@ const UseEffect = (props) => {
     const [number, setNumber] = useState(1)     
     const [fatorial, setFatorial] = useState(1)
 
+
+        //#01 ex
     useEffect(function(){
         setFatorial(calcFatorial(number))
     }, [number])
@@ -21,6 +24,13 @@ const UseEffect = (props) => {
             document.title = 'EItaaa'
         }
     }, [fatorial])
+
+    // #02 ex
+    const [status, setStatus] = useState('Impar')
+
+    useEffect(function(){
+        setStatus(number % 2 === 0 ? "Par" : "Impar")
+    })
 
     return (
         <div className="UseEffect">
@@ -36,6 +46,13 @@ const UseEffect = (props) => {
                 </div>
                 <input type="number" className="input" 
                  value={number} onChange={e  => setNumber(e.target.value)}   />
+            </div>
+            <SectionTitle title="Exercicio #02"/>
+            <div className="center">
+              <div>
+              <span className="text">Status: </span>
+                <span className="text red">{status}</span>
+              </div>
             </div>
         </div>
     )
