@@ -1,32 +1,8 @@
 import React, { useReducer } from 'react'
 import PageTitle from '../../components/layout/PageTitle'
 
-const initialState = {
-    cart: [],
-    products: [],
-    user: null,
-    number: 0
-
-}
-
-function reducer(state, action){
-    switch(action.type){
-        case 'add2ToNumber':
-            return {...state, number: state.number + 2}
-        case 'numberMulti7':
-            return {...state, number: state.number * 7}
-        case 'numberDiv25':
-            return {...state, number: state.number / 25}
-        case 'numberInt':
-            return {...state, number: parseInt(state.number)}
-        case 'numberAddN':
-            return {...state, number: state.number + action.payload}
-        case 'login':
-            return { ...state, user: { name: action.payload}}
-        default:
-            return state
-    }
-}
+import { initialState, reducer } from '../../components/store'
+import { numberAdd2, login } from '../../components/store/actions'
 
 //OBJETIVO DA FUNÇÃO REDUCER É PEGAR O ESTADO ATUAL E PARA CADA AÇÃO QUE FOR ACONTECENDO VOCE VAI EVOLUIR O ESTADO ALTERANDO ALGUM ATRIBUTO
 
@@ -46,9 +22,9 @@ const UseReducer = (props) => {
             }
                 <span className="text">{state.number}</span>
                 <div>
-                    <button className="btn" onClick={() => dispatch({type: 'login', payload: 'Maria'})}
+                    <button className="btn" onClick={() => login(dispatch, 'João')}
                     >Login</button>
-                    <button className="btn" onClick={() => dispatch({type: 'add2ToNumber'})}
+                    <button className="btn" onClick={() => numberAdd2(dispatch)}
                     >+2</button>
                     <button className="btn" onClick={() => dispatch({type: 'numberMulti7'})}
                     >*7</button>
